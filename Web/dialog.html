@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="css/dialog.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="dialog">
+        <a href="javascript://" class="dialog-close" title="关闭">关闭</a>
+        <div class="dialog-opt">
+            <div>
+                <img src="/resources/images/logo.png" />
+            </div>
+        </div>
+        <div class="dialog-box">
+        </div>
+    </div>
+    <div style="width:100px;height:100px;overflow:hidden;background:#ddd;border:1px solid #ff6a00;" id="content"></div>
+    <a id="dialog" data-str='{"key":"snrkthh"}'>打开</a>
+    <script src="scripts/jquery-1.12.0.js"></script>
+    <script>
+        !function () {
+            //$('#dialog').data('a', { 'a': new Date().valueOf() });
+            //$('#dialog').data('a', { 'a': new Date().valueOf() });
+            //$('#dialog').hover(function () {
+            //    $(this).attr('data-b','{"b":"b"}');
+            //});
+            //$('#dialog').click(function () {
+            //    $(this).attr('data-c', '{"c":"c"}');
+            //    console.log($('#dialog').data());
+            //    console.log($('#dialog').data());
+            //});
+            //alert($(window).height()); //浏览器时下窗口可视区域高度
+            //alert($(document).height()); //浏览器时下窗口文档的高度
+            //alert($(document.body).height());//浏览器时下窗口文档body的高度
+            //alert($(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度 包括border padding margin
+            //alert($(window).width()); //浏览器时下窗口可视区域宽度
+            //alert($(document).width());//浏览器时下窗口文档对于象宽度
+            //alert($(document.body).width());//浏览器时下窗口文档body的高度
+            //alert($(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度 包括border padding margin
+
+            //alert($(document).scrollTop()); //获取滚动条到顶部的垂直高度
+            //alert($(document).scrollLeft()); //获取滚动条到左边的垂直宽度
+
+            jQuery.fn.extend({
+                mydialog: function (opt) {
+                    var default_options = {
+                        width: null,
+                        height: null,
+                        z_index: 999,
+                        callclose: null,//关闭回调
+                        callbegin: null,//弹出前回调
+                        callback: null//回调
+                    }
+                    var options = ($.isPlainObject(opt) || !opt) ? $.extend(true, {}, default_options, opt) : $.extend(true, {}, default_options),
+                    _doc = $(document),
+                    _win = $(window),
+                    _body = $('body'),
+                    _dialog,
+                    createMydialog,
+                   _close,
+                   _dialog_head,
+                   _dialog_content;
+
+                    var createMydialog = function () {
+                        _dialog = $('<div class="dialog"></div>').appendTo(_body);
+                        _close = $('<a href="javascript://" class="dialog-close" title="关闭">关闭</a>').appendTo(_dialog);
+                        _dialog_head = $('<div class="dialog-opt"><div><span>标题</span></div></div>').appendTo(_dialog);
+                        _dialog_content = $('<div class="dialog-box"></div>').appendTo(_dialog);
+                    }
+                    return this.each(function () {
+                        var _mydialog = $(this).data('mydialog_data');
+                        if (_mydialog) {
+                            if ($.type(opt) === 'string') {
+                                switch (opt) {
+                                    case 'hide':
+                                        _mydialog.trigger('mydialog.hide');
+                                        break;
+                                    case 'show':
+                                        _mydialog.trigger('mydialog.show');
+                                        break;
+                                }
+                            }
+                            return 0;
+                        }
+                        if (options.callbegin) options.callbegin();
+                        createMydialog();
+                        //配置
+                        _dialog.css({
+                            'position': 'absolute',
+                            'zIndex': options.z_index
+                        });
+                        if (options.width) {
+                            _dialog.width(options.width);
+                        }
+                        if (options.height) {
+                            _dialog.height(options.height);
+                        }
+                        //将指定内容放入dialog
+                        _dialog_content.append(this);
+                        var _dialog_w_h = {
+                            left: _win.width() / 2 - _dialog.width() / 2,
+                            top: _win.height() / 2 - _dialog.height() / 2 + _doc.scrollTop()
+                        }
+                        _dialog.css(_dialog_w_h);
+                        _dialog.on('mydialog.hide', function () {
+                            _dialog.hide();
+                        });
+                        _dialog.on('mydialog.show', function () {
+                            _dialog.show();
+                        });
+                        //事件加载
+                        _close.on('click', function () {
+                            if (options.callclose) options.callclose();
+                            _dialog.trigger('mydialog.hide');
+                        });
+                        $(this).data('mydialog_data', _dialog);
+                        if (options.callback) options.callback();
+                    });
+                }
+
+            });
+
+            $('#content').mydialog({
+                width: 500,
+                height: 300
+            });
+            $('#content').click(function () {
+                $('#content').mydialog('hide');
+            });
+            $('#dialog').click(function () {
+                $('#content').mydialog('show');
+            });
+        }();
+    </script>
+</body>
+</html>
