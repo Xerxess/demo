@@ -24,6 +24,7 @@ textarea { -webkit-appearance: none; }
 
 input[type="text"], textarea, button { outline: none; }
 
+
 .clear { zoom: 1; }
 
 .clear:after { content: ''; display: block; width: 0px; height: 0px; overflow: hidden; visibility: hidden; clear: both; }
