@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mousewheel</title>
+    <meta charset="utf-8" />
+    <link href="css/normalize.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.12.0.js"></script>
+    <script src="scripts/mousewheel.js"></script>
+    <script>
+        $(function () {
+            $('#mousewheel').mousewheel(function (event, delta, deltaX, deltaY) {
+                console.log(delta + "," + deltaX + "," + deltaY);
+                $(this).css({ 'top': $(this).offset().top + deltaY });
+                //event.stopPropagation();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="mousewheel" style="width:500px;height:200px;background:#ccc;position:absolute;top:0px;left:0px;">
+
+    </div>
+</body>
+</html>

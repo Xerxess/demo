@@ -1,0 +1,54 @@
+/**
+ * yangchuan on 15/9/16分页
+ */
+@media (min-width: 1200px) {
+    div.pagination .page-info,
+    div.pagination .pagenumber { height: 28.8px; line-height: 28.8px; }
+    div.pagination .page-info { margin-right: 4.5px; }
+    div.pagination .page-info span { margin: 0px 2px; }
+    div.pagination .pagenumber a,
+    div.pagination .pagenumber span { width: 72px; height: 27px; font-size: 12.6px; line-height: 27px; }
+    div.pagination .pagenumber a.page-f-e,
+    div.pagination .pagenumber span.page-f-e { width: 40.5px; }
+    div.pagination .pagenumber input { width: 40.5px; height: 27px; line-height: 27px; }
+    div.pagination .pagenumber .page-number { padding: 0px 9px; height: 27px; font-size: 14px; line-height: 27px; }
+    div.pagination .pagenumber .page-number .page-n-input i { border: 4.5px dashed transparent; border-top: 4.5px solid #cccccc; position: relative; top: 2.7px; margin: 0px 0px 0px 4.5px; }
+    div.pagination .pagenumber .page-number .page-n-list { left: -1px; top: 27.9px; }
+    div.pagination .pagenumber .page-number .page-n-list ul li { height: 27px; }
+}
+@media (min-width: 1400px) {
+    div.pagination .page-info,
+    div.pagination .pagenumber { height: 28px; line-height: 28px; }
+    div.pagination .page-info { margin-right: 4.375px; }
+    div.pagination .page-info span { margin: 0px 2px; }
+    div.pagination .pagenumber a,
+    div.pagination .pagenumber span { width: 70px; height: 26.25px; font-size: 12.25px; line-height: 26.25px; }
+    div.pagination .pagenumber a.page-f-e,
+    div.pagination .pagenumber span.page-f-e { width: 39.375px; }
+    div.pagination .pagenumber input { width: 39.375px; height: 26.25px; line-height: 26.25px; }
+    div.pagination .pagenumber .page-number { padding: 0px 8.75px; height: 26.25px; font-size: 14px; line-height: 26.25px; }
+    div.pagination .pagenumber .page-number .page-n-input i { border: 4.375px dashed transparent; border-top: 4.375px solid #cccccc; position: relative; top: 2.625px; margin: 0px 0px 0px 4.375px; }
+    div.pagination .pagenumber .page-number .page-n-list { left: -1px; top: 27.125px; }
+    div.pagination .pagenumber .page-number .page-n-list ul li { height: 26.25px; }
+}
+.pagination{height: 30px;text-align: right;padding-top:10px;}
+.pagination .page-info,
+.pagination .pagenumber { display: inline-block; *display: inline; *zoom: 1; *dispaly: block; height: 32px; line-height: 32px; vertical-align: middle; }
+.pagination .page-info { margin-right: 5px; }
+.pagination .page-info .pageindex { color: green; }
+.pagination .pagenumber a,
+.pagination .pagenumber span { font-family: 'Microsoft Yahei'; display: inline-block; *display: inline; *zoom: 1; *dispaly: block; width: 80px; height: 30px; font-size: 14px; letter-spacing: 1px; line-height: 30px; vertical-align: middle; border-radius: 1px; text-align: center; border: 1px solid #ccc; background: #fff; color: #666; }
+.pagination .pagenumber a.page-f-e,
+.pagination .pagenumber span.page-f-e { width: 45px; }
+.pagination .pagenumber span.disable { border-color: #ccc; color: #ccc; }
+.pagination .pagenumber span.index { border-color: #888; background: #e1e1e1; }
+.pagination .pagenumber a { cursor: pointer; }
+.pagination .pagenumber a:hover { background: #e1e1e1; border-color: #888; }
+.pagination .pagenumber input { width: 45px; height: 30px; line-height: 30px; border: 1px solid #ccc; background: #fff; color: #666; text-align: center; vertical-align: middle; }
+.pagination .pagenumber input:hover { background: #e1e1e1; border-color: #888; }
+.pagination .pagenumber .page-number { display: inline-block; *display: inline; *zoom: 1; *dispaly: block; position: relative; padding: 0px 10px; height: 30px; font-size: 14px; letter-spacing: 1px; line-height: 30px; vertical-align: middle; border-radius: 1px; text-align: center; border: 1px solid #ccc; background: #fff; color: #666; }
+.pagination .pagenumber .page-number .page-n-input { cursor: pointer; }
+.pagination .pagenumber .page-number .page-n-input i { display: inline-block; *display: inline; *zoom: 1; *dispaly: block; width: 0px; height: 0px; border: 5px dashed transparent; border-top: 5px solid #ccc; position: relative; top: 3px; margin: 0px 0px 0px 5px; }
+.pagination .pagenumber .page-number .page-n-list { display: none; background: #fff; width: 100%; border: 1px solid #ccc; border-top: none; overflow: hidden; position: absolute; left: -1px; top: 31px; }
+.pagination .pagenumber .page-number .page-n-list ul li { width: 100%; height: 30px; border-top: 1px solid #ccc; }
+.pagination .pagenumber .page-number .page-n-list ul li:hover { background: #ccc; cursor: pointer; }
