@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>js拖拽</title>
+    <style>
+        * { margin: 0px; padding: 0px; }
+        .drafting { width: 450px; height: 350px; overflow: hidden; position: absolute; z-index: 1; margin: 0px; box-shadow: 0px 0px 5px #888; left: 0px; right: 0px; background: #ddd; padding: 1px; }
+        .drafting .dra-top { height: 45px; background: #ddd; cursor: move; line-height: 45px; }
+        .drafting .dra-content { height: 285px; overflow: hidden; padding: 10px; background: #fff; }
+    </style>
+</head>
+<body>
+    <div class="drafting" id="drafting">
+        <div class="dra-top" id="dramove">求拖我</div>
+        <div class="dra-content">内容在这里</div>
+    </div>
+    <span id="span" style="position:relative;z-index:2;"></span>
+    <script type="text/javascript">
+        var dra = {
+            //初始化
+            config: {
+                dom: document.getElementById("drafting"),//拖拽容器
+                dom1: document.getElementById("dramove"),//拖拽dom
+                domw: document.getElementById("drafting").scrollWidth,
+                domh: document.getElementById("drafting").scrollHeight,
+                startleft: 0,//起始left位置
+                starttop: 0,//起始top位置
+                endleft: 0,//结束left位置
+                endtop: 0,//结束top位置
+                x: 0,//鼠标相对窗口x坐标
+                y: 0,//鼠标相对窗口y坐标
+                clientX: 0,//起始鼠标位置
+                clientY: 0//起始鼠标位置
+            },
+            clearselect: window.getSelection ? function () { window.getSelection().removeAllRanges(); } : function () { document.selection.empty(); },//清空用户文体选中
+            //事件绑定
+            init: function () {
+                var ts = this;
+                ts.config.startleft = ts.config.dom.offsetLeft;
+                ts.config.starttop = ts.config.dom.offsetTop;
+                ts.config.dom1.onmousedown = function (e) {
+                    e = e || window.event;
+                    ts.config.clientX = e.clientX;
+                    ts.config.clientY = e.clientY;
+                    ts.config.x = ts.config.clientX - ts.config.startleft;
+                    ts.config.y = ts.config.clientY - ts.config.starttop;
+                    //document.getElementById("span").innerText = ts.config.domw + "," + ts.config.domh;
+                    document.onmousemove = function () {
+                        ts.movestart();
+                    }
+                    document.onmouseup = function () {
+                        ts.moveend();
+                    }
+                };
+            },
+            movestart: function (e) {
+                var ts = this;
+                e = e || window.event;
+                var x = ts.config.clientX - e.clientX;//x移动距离
+                var y = ts.config.clientY - e.clientY;//y移动距离
+                ts.config.endleft = ts.config.startleft - x;
+                ts.config.endtop = ts.config.starttop - y;
+
+                var clienth = document.documentElement.clientHeight || document.body.clientHeight; //当前页面可视高度
+                var clientw = document.documentElement.clientWidth || document.body.clientWidth; //当前页面可视高度
+                //判断临界点
+                ts.config.endleft = ts.config.endleft <= 0 ? 0 : ts.config.endleft;
+                ts.config.endtop = ts.config.endtop <= 0 ? 0 : ts.config.endtop;
+                if ((ts.config.endleft + ts.config.domw) >= clientw) {
+                    ts.config.endleft = clientw - ts.config.domw;
+                }
+                if ((ts.config.endtop + ts.config.domh) >= clienth) {
+                    ts.config.endtop = clienth - ts.config.domh;
+                }
+                ts.config.dom.style.left = ts.config.endleft + "px";
+                ts.config.dom.style.top = ts.config.endtop + "px";
+                ts.clearselect();
+                //document.getElementById("span").innerText = ts.config.clientX + "," + e.clientX;
+            },
+            moveend: function () {
+                var ts = this;
+                ts.config.startleft = ts.config.endleft;//记录结束left位置
+                ts.config.starttop = ts.config.endtop;//记录结束top位置
+                document.onmousemove = null;
+                document.onmouseup = null;
+                return false;
+            }
+        }
+        dra.init();
+    </script>
+</body>
+</html>

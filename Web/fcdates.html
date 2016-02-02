@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta content="width =device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone =no" name="format-detection" />
+    <title>日期控件</title>
+</head>
+<body>
+    <input id="txttime" value="" style="height:20px;border:1px solid #e2e2e2;margin:10px;width:250px;line-height:25px;font:15px/1.5 'Microsoft YaHei';padding:5px 0px;text-align:center;color:#009F95;border-radius:5px;" />
+    <input id="txttime2" value="" style="height:20px;border:1px solid #e2e2e2;margin:10px;width:250px;line-height:25px;font:15px/1.5 'Microsoft YaHei';padding:5px 0px;text-align:center;color:#009F95;border-radius:5px;" />
+    <input id="txttime3" value="" style="height:20px;border:1px solid #e2e2e2;margin:10px;width:250px;line-height:25px;font:15px/1.5 'Microsoft YaHei';padding:5px 0px;text-align:center;color:#009F95;border-radius:5px;" />
+    <input id="txttime4" value="" style="height:20px;border:1px solid #e2e2e2;margin:10px;width:250px;line-height:25px;font:15px/1.5 'Microsoft YaHei';padding:5px 0px;text-align:center;color:#009F95;border-radius:5px;" />
+    <script src="scripts/fcdates/fcdates.js"></script>
+    <script type="text/javascript">
+        Fcdates({
+            dom: document.getElementById('txttime'),
+            format: 'YYYY/MM/dd HH:mm:ss'
+        });
+        Fcdates({
+            dom: document.getElementById('txttime2'),
+            format: 'YYYY-MM-dd HH:mm:ss'
+        });
+        Fcdates({
+            dom: document.getElementById('txttime3'),
+            format: 'YYYY/MM/dd'
+        });
+        Fcdates({
+            dom: document.getElementById('txttime4'),
+            format: 'YYYY-MM-dd'
+        });
+    </script>
+</body>
+</html>
