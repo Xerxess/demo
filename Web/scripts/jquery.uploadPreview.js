@@ -93,8 +93,8 @@
                 if (img_width > 0 && img_height > 0) {
                     var rate = (opts.width / img_width < opts.height / img_height) ? opts.width / img_width : opts.height / img_height;
                     if (rate <= 1) {
-                        //img_width = img_width * rate;
-                        //img_height = img_height * rate;
+                        img_width = img_width * rate;
+                        img_height = img_height * rate;
                         imgbox.width(opts.width);
                         imgbox.height(opts.height);
                         if (fit) {
@@ -115,7 +115,7 @@
                     setTimeout(function () {
                         imgDiv.show();
                         if (fit) {
-                            imgbox.show();
+                            //imgbox.show();
                         }
                     }, 100);
                 }
@@ -129,18 +129,35 @@
                 }
             };
             var createImg = function () {
-                imgDiv.html('');
+                imgbox.html('');
                 var img = $("<img />");
-                imgDiv.replaceWith(img);
+                imgbox.html(img);
+                if (!$.support.leadingWhitespace) {
+                    imgbox.append('<span>&nbsp;</span>');
+                }
                 imgDiv = img;
             };
+            var init = function (clear) {
+                if (fit) {
+                    imgbox.css({ filter: "" });
+                }
+                if (opts.noimg) {
+                    createImg();
+                    imgDiv.hide().attr('src', opts.noimg);
+                    imgDiv.on('load', function () {
+                        imgDiv.show();
+                    });
+                    if (!$.support.leadingWhitespace) {
+                        imgDiv.hide().attr('src', opts.noimg);
+                    }
+                }
+            };
+            init();
             _this.change(function () {
-                imgDiv.hide();
-                imgDiv.css({ 'width': '', 'height': '' });
-                imgbox.css({ 'width': '', 'height': '', 'padding': '' });
                 if (this.value) {
                     if (!RegExp("\.(" + opts.imgType.join("|") + ")$", "i").test(this.value.toLowerCase())) {
                         myalert("图片类型必须是" + opts.imgType.join("，") + "中的一种");
+                        init();
                         _this.val('');
                         if (opts.error) {
                             opts.error(infocode.code1);
@@ -170,12 +187,13 @@
                     if (fit) {
                         try {
                             this.select();
+                            this.blur();
                             var imgSrc = document.selection.createRange().text;
                             imgbox.html('');
                             imgbox.css({ filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)" });
                             imgbox[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = "scale";
                             imgbox[0].filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = imgSrc;
-                            imgbox.hide();
+                            //imgbox.hide();
                             if (opts.validatorEnd)
                                 opts.validatorEnd();
                             setTimeout(function () {
