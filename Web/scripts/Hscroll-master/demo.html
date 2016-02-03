@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+      <meta http-equiv="content-type" content="text/html;charset=utf-8">
+      <title>Hscroll使用演示</title>
+      <script language="javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script language="javascript" src="Hscroll.js"></script>
+      <script language="javascript">
+      var count = 0;
+      $(document).ready(function (){
+        function end(){
+          $('#msg').append('<p class="ap">这是内容'+(count ++ )+'</p>')
+        }
+        var myScroll = new Hscroll(window,end, false);
+
+        function mockAjax(scroll){
+          setTimeout(function(){
+            $('#msg').prepend('<p class="ap">这是内容'+(count ++ )+'</p>')
+            scroll.complete();// 完成后，才会触发下一次滚动到结尾的事件。
+          }, 1000);
+        }
+
+        function end2(){
+          mockAjax(this);
+        }
+        var myScroll2 = new Hscroll($('#div1')[0], end2, true);
+      });
+      </script>
+    <body>
+    <div id="div1" style="overflow-y:auto; overflow-x:hidden; height:200px;">
+      <div style="background-color:#ccc; height:550px;">xxxxxxxxxxx</div>
+    </div>
+    <div id="msg">
+        <p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p><p class="ap">这是内容</p>
+        <p class="ap">这是内容</p><p class="ap">这是内容</p>
+
+    </div>
+    </body>
+    </html>

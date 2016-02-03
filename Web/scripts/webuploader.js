@@ -100,13 +100,13 @@ jQuery(function () {
             mimeTypes: '*'
         },
         // swf文件路径
-        swf: '/resources/webuploader-0.1/Uploader.swf',
+        swf: '/scripts/webuploader-0.1.5/Uploader.swf',
         disableGlobalDnd: true,
         chunked: true,
         server: '/UpFileServlet',
         fileNumLimit: 300,
         fileSizeLimit: 5 * 1024 * 1024, // 200 M
-        fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
+        fileSingleSizeLimit: 1024*     // 50 M
     });
 
     // 添加“添加文件”的按钮，
