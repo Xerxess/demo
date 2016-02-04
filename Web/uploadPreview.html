@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>图片上传浏览</title>
+    <meta charset="utf-8" />
+    <link href="css/normalize.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.12.0.js"></script>
+    <script src="scripts/jquery.uploadPreview.js"></script>
+    <style>
+        .upfile-dom { width: 98px; height: 28px; background: #f3f3f3; color: #999; position: relative; border: 1px solid #ccc; border-radius: 2px; zoom: 1; overflow: hidden; }
+        .upfile-dom .upfile-a { display: block; width: 98px; height: 28px; text-align: center; line-height: 28px; background: #f3f3f3; color: #999; }
+        .upfile-dom .inputfile { height: 256px; font-size: 300px; position: absolute; right: 0; top: 0; opacity: 0; filter: alpha(opacity=0); cursor: pointer; }
+        .upfile-show-box { overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div class="upfile">
+        <div class="upfile-dom">
+            <a class="upfile-a">点击上传</a>
+            <input type="file" id="file" class="inputfile" name="file" />
+        </div>
+    </div>
+    <div class="upfile-show-box" id="imgBox"></div>
+
+    <div class="upfile">
+        <div class="upfile-dom">
+            <a class="upfile-a">点击上传</a>
+            <input type="file" id="file2" class="inputfile" name="file" />
+        </div>
+    </div>
+    <div class="upfile-show-box" id="imgBox2"></div>
+    <script>
+        $('#file').uploadPreview({
+            width: 500,
+            height: 200,
+            maxSize: 5000,
+            imgBox: $('#imgBox'),
+            noimg: '/images/no.gif',
+            isalert: false,
+            validatorerror: function () {
+                alert('格式错误1');
+            },
+            validatorback: function () {
+                $('#file').hide();
+                console.log('验证成功');
+            },
+            callback: function () {
+                $('#file').show();
+                console.log('回调函数');
+            },
+            errorback: function (info) {
+                $('#file').show();
+                alert('发生错误');
+            }
+        });
+        $('#file2').uploadPreview({
+            maxSize: 5000,
+            imgBox: $('#imgBox2'),
+            noimg: '/images/no.gif',
+            isalert: false,
+            validatorback: function () {
+                $('#file2').hide();
+                console.log('验证成功');
+            },
+            callback: function () {
+                $('#file2').show();
+                console.log('回调函数');
+            },
+            errorback: function (info) {
+                $('#file2').show();
+                alert('发生错误');
+            }
+        });
+    </script>
+</body>
+</html>
