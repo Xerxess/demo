@@ -32,11 +32,11 @@
     <div class="upfile-show-box" id="imgBox2"></div>
     <script>
         $('#file').uploadPreview({
-            width: 500,
-            height: 200,
+            width: 175,
+            height: 125,
             maxSize: 5000,
             imgBox: $('#imgBox'),
-            noimg: '/images/no.gif',
+            noimg: '/images/loading.gif',
             isalert: false,
             validatorerror: function () {
                 alert('格式错误1');
@@ -57,7 +57,7 @@
         $('#file2').uploadPreview({
             maxSize: 5000,
             imgBox: $('#imgBox2'),
-            noimg: '/images/no.gif',
+            noimg: '/images/loading.gif',
             isalert: false,
             validatorback: function () {
                 $('#file2').hide();

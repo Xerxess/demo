@@ -28,7 +28,7 @@
                 imgBox: null,
                 maxSize: 300,
                 isalert: true,
-                noimg: '/images/noimg.gif',
+                noimg: '/images/loading.gif',
                 imgType: ["gif", "jpeg", "jpg", "bmp", "png"],
                 validatorerror: null,
                 validatorback: null,
@@ -104,7 +104,12 @@
                     if (fit) {
                         $imgshow[0].filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = "scale";
                     }
-                    $imgshow.css({ "margin-left": left, "margin-top": top }).show();
+                    if ($imgshow === $fit) {
+                        $imgshow.css({ "margin-left": left, "margin-top": top }).show();
+                    }
+                    else{
+                        $imgshow.fadeIn();
+                    }
                 }
                 if (opts.callback) {
                     opts.callback();
@@ -112,14 +117,12 @@
             };
             var createImg = function () {
                 imgbox.html('');
-                $img = $("<img style='display:none;' />");
-                imgbox.html($img);
-                if (!$.support.leadingWhitespace) {
-                    imgbox.append('<span>&nbsp;</span>');//兼容ie7垂直居中
-                }
+                $img = $("<img style='display:none;vertical-align: middle;' />");
+                imgbox.html($img).css('text-align','center');
+                imgbox.append('<span style="vertical-align: middle;display: inline-block;height: 100%;vertical-align: middle;visibility: hidden;width: 0px;overflow:hidden;">&nbsp;</span>');
             };
             var createfit = function () {
-                $fit = $("<div style='display:none;'></div>");
+                $fit = $("<div style='display:none;float:left;zoom:1;'></div>");
                 imgbox.html($fit);
             }
             var init = function (clear) {
@@ -138,8 +141,8 @@
                 createImg();
                 $img.attr('src', opts.noimg);
                 $img.on('load', function () {
-                    $img.off('load');
                     $img.show();
+                    $img.off('load');
                 });
                 $img.on('error', function () {
                     $img.off('load');
@@ -151,6 +154,7 @@
                     if (!RegExp("\.(" + opts.imgType.join("|") + ")$", "i").test(this.value.toLowerCase())) {
                         myalert("图片类型必须是" + opts.imgType.join("，") + "中的一种");
                         _this.val('');
+                        init();
                         if (opts.validatorerror) {
                             opts.validatorerror(infocode.code1);
                         }
