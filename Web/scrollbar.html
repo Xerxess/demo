@@ -3,7 +3,9 @@
 <head>
 
     <title></title>
+    <link href="css/normalize.css" rel="stylesheet" />
     <style type="text/css">
+        html {font-size: 625%;}
         * { margin: 0px; padding: 0px; }
         .scroll-boxall { width: 312px; height: 500px; overflow: hidden; zoom: 1; border: 1px solid #ddd; position: absolute; left: 50%; margin-left: -156px; margin-top: 100px; }
         .scroll-boxall2 { width: 312px; height: 500px; overflow: hidden; zoom: 1; border: 1px solid #ddd; position: absolute; left: 50%; margin-left: -156px; margin-top: 700px; }
@@ -12,6 +14,11 @@
         .s-box .s-s { width: 8px; height: 500px; position: absolute; top: 0px; right: 2px; }
         .s-s .s { width: 8px; height: 100px; overflow: hidden; position: absolute; top: 0px; left: 0px; border-radius: 5px; background: #ddd; cursor: pointer; display: inline-block; }
         .box { border: 1px solid #ff6a00; padding: 20px 0px; text-align: center; font-size: 25px; margin-top: 10px; }
+
+        .myscroll-container { width: 500px; height: 702px; overflow: hidden; position: relative; }
+        .myscroll-container .myscroll-content { width: 500px; height: 1000px; background: #ccc; }
+        .myscroll-container .myscroll-s { position: absolute; top: 0px; right: 0px; width: 20px; height: 700px; border-radius: 20px; background: #000; border: 1px solid #1f1e1e; }
+        .myscroll-container .myscroll-s .myscroll-ss { width: 20px; height: 50px; border-radius: 20px; position: absolute; left: 0px; top: 0px; background: #444343; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -32,6 +39,18 @@
             <div class="s-s" id="s-s">
                 <span class="s" id="s"></span>
             </div>
+        </div>
+    </div>
+    <div class="myscroll-container">
+        <div class="myscroll-content">
+            <p style="font-size:16px;">字体测试</p>
+            <p style="font-size:0.12em;">字体测试</p>
+            <p style="font-size:0.24rem;">字体测试</p>
+            <p style="font-size:24px;">字体测试</p>
+            <div style="width:0.1rem;height:0.1rem;background:red;border:0.1rem solid #000;"></div>
+        </div>
+        <div class="myscroll-s">
+            <span class="myscroll-ss"></span>
         </div>
     </div>
     <script type="text/javascript">
