@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>margin 负值</title>
+    <meta charset="utf-8" />
+    <link href="css/normalize.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.12.0.js"></script>
+    <style>
+        .margin-left{width:200px;height:200px; border:1px solid #ddd;margin:0px auto;}
+         .margin-left div{margin-left:-100px;height:200px;background:#ddd;margin-right:-100px;}
+    </style>
+</head>
+<body>
+    <div class="margin-left">
+        <div></div>
+    </div>
+    <style>
+        body, ul, li { padding: 0; margin: 0; }
+        ul, li { list-style: none; }
+        .container { height: 210px; width: 460px; border: 5px solid #000; }
+        ul { height: 210px; overflow: hidden; margin-right: -20px; }
+        /*一个负的margin-right,相当于把ul的宽度增加了20px*/
+        li { height: 100px; width: 100px; background: #09F; float: left; margin-right: 20px; margin-bottom: 10px; }
+
+        .floatleft{
+            margin:0px auto;
+            margin-left:500px;
+            border:5px solid #ccc;padding:50px;
+        }
+        .floatleft:after{content:'';display:block; clear:both;height:0px;overflow:hidden;visibility:hidden;}
+        .floatleft div{
+            width:100px;
+            height:100px;
+            background:#ccc;
+            float:left;
+            margin-right:-10px;
+        }
+        .songboder{
+            width:500px;background:#ccc;
+            margin:0px auto;
+        }
+         .songboder:after{content:'';display:block; clear:both;height:0px;overflow:hidden;visibility:hidden;}
+      .songboder div{width:98px;height:98px;border:1px solid #ff6a00;margin-right:-1px;margin-bottom:-1px;float:left;position:relative;}
+      .songboder div:hover{z-index:101;}
+
+        /* 两列右侧自适应布局 */
+.g-bd1{margin:0 0 10px;}
+.g-sd1{position:relative;float:left;width:190px;margin-right:-190px;}
+.g-mn1{float:right;width:100%;}
+.g-mn1c{margin-left:200px;}
+    </style>
+    <div class="container">
+        <ul>
+            <li>子元素1</li>
+            <li>子元素2</li>
+            <li>子元素3</li>
+            <li>子元素4</li>
+            <li>子元素5</li>
+            <li>子元素6</li>
+            <li>子元素7</li>
+            <li>子元素8</li>
+        </ul>
+    </div>
+
+    <div class="floatleft">
+        <div style="background:#ff6a00"></div>
+        <div style="background:#ffd800"></div>
+        <div style="background:#00ffff"></div>
+    </div>
+
+    <div class="songboder">
+        <div class="border" style="border-color:#ffd800"></div>
+        <div class="border" style="border-color:#4cff00"></div>
+        <div class="border" style="border-color:#0094ff"></div>
+        <div class="border" style="border-color:#ff6a00"></div>
+        <div class="border" style="border-color:#cbb53c"></div>
+        <div class="border" style="border-color:#0094ff"></div>
+        <div class="border" style="border-color:#711a5d"></div>
+        <div class="border" style="border-color:#ffd800"></div>
+        <div class="border" style="border-color:#4cff00"></div>
+        <div class="border" style="border-color:#0094ff"></div>
+        <div class="border" style="border-color:#ff6a00"></div>
+        <div class="border" style="border-color:#cbb53c"></div>
+        <div class="border" style="border-color:#0094ff"></div>
+        <div class="border" style="border-color:#711a5d"></div>
+    </div>
+
+    <div class="g-bd1 f-cb">
+        <div class="g-sd1">
+            <p>左侧定宽</p>
+        </div>
+        <div class="g-mn1">
+            <div class="g-mn1c">
+                <p>右侧自适应</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
