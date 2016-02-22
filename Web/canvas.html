@@ -27,10 +27,11 @@
             $end = $('#endbtn').hide();
         var _width, _height, _play = false, _context, arryanimate = [];
 
-        var animateitem = function (x, y, radius, vx, vy, ax, ay) {
+        var animateitem = function (x, y, radius, mass, vx, vy, ax, ay) {
             this.x = x;
             this.y = y;
             this.radius = radius;
+            this.mass = mass;
 
             this.vx = vx;
             this.vy = vy;
@@ -54,49 +55,72 @@
 
             for (var i = 0, j = arryanimate.length; i < j; i++) {
                 var item = arryanimate[i];
-                for(var x=i+1;x<arryanimate.length;x++){
-                    var item2 = arryanimate[x];
+                for (var _j = i + 1; _j < j; _j++) {
+                    var item2 = arryanimate[_j];
 
-                    var dx = item2.x - item.x;
-                    var dy = item2.y - item.y;
-                    var distance = Math.sqrt((dx * dx) + (dy * dy));
+                    var dX = item2.x - item.x;
+                    var dY = item2.y - item.y;
+                    var distance = Math.sqrt((dX * dX) + (dY * dY));
 
                     if (distance <= item.radius + item2.radius) {//碰撞到了
-                        var angle = Math.atan2(dy, dx);
+                        var angle = Math.atan2(dY, dX);
                         var sine = Math.sin(angle);
-                        var consine = Math.cos(angle);
+                        var cosine = Math.cos(angle);
+
                         var _x = 0, _y = 0;
-                        var _xb = dx * consine + dy * sine;
-                        var _yb = dy * consine - dx * sine;
+                        var _xb = dX * cosine + dY * sine;
+                        var _yb = dY * cosine - dX * sine;
 
-                        var _vx = item.vx * consine + item.vy * sine;
-                        var _vy = item.vy * consine - item.vx * sine;
+                        var _vx = item.vx * cosine + item.vy * sine;
+                        var _vy = item.vy * cosine - item.vx * sine;
 
-                        var _vxb = item2.vx * consine + item2.vy * sine;
-                        var _vyb = item2.vy * consine - item2.vx * sine;
+                        var _vxb = item2.vx * cosine + item2.vy * sine;
+                        var _vyb = item2.vy * cosine - item2.vx * sine;
+
+                        //_vx *= -1;
+                        //_vxb *= -1;
+                        var vtotal = _vx - _vxb;
+                        _vx = ((item.mass - item2.mass) * _vx + 2 * item2.mass * _vxb) / (item.mass + item2.mass);
+                        _vxb = vtotal + _vx;
+
+                        _xb = _x + (item.radius + item2.radius);
+
+                        item.x = item.x + (_x * cosine - _y * sine);
+                        item.y = item.y + (_y * cosine + _x * sine);
+
+                        item2.x = item.x + (_xb * cosine - _yb * sine);
+                        item2.y = item.y + (_yb * cosine + _xb * sine);
+
+                        item.vx = _vx * cosine - _vy * sine;
+                        item.vy = _vy * cosine + _vx * sine;
+
+                        item2.vx = _vxb * cosine - _vyb * sine;
+                        item2.vy = _vyb * cosine + _vxb * sine;
+
                     }
                 }
-               
 
 
-                if (Math.abs(item.vx) < 10) {
-                    item.vx += item.ax;
-                }
-                if (Math.abs(item.vy) < 10) {
-                    item.vy += item.ay;
-                }
-                if (Math.abs(item.vx) > 0.1) {
-                    item.vx *= 0.9;
-                }
-                else {
-                    item.vx = 0;
-                }
-                if (Math.abs(item.vy) > 0.1) {
-                    item.vy *= 0.9;
-                }
-                else {
-                    item.vy = 0;
-                }
+
+                //if (Math.abs(item.vx) < 10) {
+                //    item.vx += item.ax;
+                //}
+                //if (Math.abs(item.vy) < 10) {
+                //    item.vy += item.ay;
+                //}
+                //if (Math.abs(item.vx) > 0.1) {
+                //    item.vx *= 0.9;
+                //}
+                //else {
+                //    item.vx = 0;
+                //}
+                //if (Math.abs(item.vy) > 0.1) {
+                //    item.vy *= 0.9;
+                //}
+                //else {
+                //    item.vy = 0;
+                //}
+
                 item.x += item.vx;
                 item.y += item.vy;
                 if (item.x - item.radius < 0) {
@@ -138,18 +162,34 @@
         });
 
         $initial.on('click', function () {
-            for (var i = 0; i < 10; i++) {
+            //for (var i = 0; i < 10; i++) {
+            //    var x = 20 + (Math.random() * (_width - 40));
+            //    var y = 20 + (Math.random() * (_height - 40));
+            //    var radius = 5 + Math.random() * 10;
+
+            //    var vx = Math.random() * 4;
+            //    var vy = Math.random() * 4;
+
+            //    var ax = Math.random() * 0.8 - 0.1;
+            //    var ay = Math.random() * 0.8 - 0.1;
+            //    arryanimate.push(new animateitem(x, y, radius, vx, vy, ax, ay));
+            //    console.log(arryanimate);
+            //    animate();
+            //}
+
+            for (var i = 0; i < 20; i++) {
                 var x = 20 + (Math.random() * (_width - 40));
                 var y = 20 + (Math.random() * (_height - 40));
-                var radius = 5 + Math.random() * 10;
+                var radius = 20;
+                var mass = radius / 2;
 
                 var vx = Math.random() * 4;
                 var vy = Math.random() * 4;
 
-                var ax = Math.random() * 0.2 - 0.1;
-                var ay = Math.random() * 0.2 - 0.1;
-                arryanimate.push(new animateitem(x, y, radius, vx, vy, ax, ay));
-                console.log(arryanimate);
+                var ax = Math.random() * 0.8 - 0.1;
+                var ay = Math.random() * 0.8 - 0.1;
+                arryanimate.push(new animateitem(x, y, radius, mass, vx, vy, ax, ay));
+                //console.log(arryanimate);
                 animate();
             }
         });
