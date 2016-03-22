@@ -1,12 +1,18 @@
-/* Icon Shrink */
-@mixin icon-shrink {
+/* Icon Push */
+@include keyframes(#{$nameSpace}-icon-push) {
+	50% {
+		@include prefixed(transform, scale(.5));
+	}
+}
+
+@mixin icon-push {
 	@include hacks();
 	position: relative;
 	padding-right: #{$spaceBetweenTextAndArrows};
 	@include prefixed(transition-duration, $mediumDuration);
 
 	&:before {
-		content: "\f119";
+		content: "\f006";
 		position: absolute;
 		right: 1em;
 		padding: 0 1px;
@@ -22,7 +28,10 @@
 	&:active {
 
 		&:before {
-			@include prefixed(transform, scale(.8));
+			@include prefixed(animation-name, #{$nameSpace}-icon-push);
+			@include prefixed(animation-duration, $mediumDuration);
+			@include prefixed(animation-timing-function, linear);
+			@include prefixed(animation-iteration-count, 1);
 		}
 	}
 }
