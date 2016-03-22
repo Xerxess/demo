@@ -7,8 +7,8 @@
     <link href="css/normalize.css" rel="stylesheet" />
     <script src="scripts/jquery-1.12.0.js"></script>
     <style>
-        .margin-left{width:200px;height:200px; border:1px solid #ddd;margin:0px auto;}
-         .margin-left div{margin-left:-100px;height:200px;background:#ddd;margin-right:-100px;}
+        .margin-left { width: 200px; height: 200px; border: 1px solid #ddd; margin: 0px auto; }
+        .margin-left div { margin-left: -100px; height: 200px; background: #ddd; margin-right: -100px; }
     </style>
 </head>
 <body>
@@ -23,32 +23,26 @@
         /*一个负的margin-right,相当于把ul的宽度增加了20px*/
         li { height: 100px; width: 100px; background: #09F; float: left; margin-right: 20px; margin-bottom: 10px; }
 
-        .floatleft{
-            margin:0px auto;
-            margin-left:500px;
-            border:5px solid #ccc;padding:50px;
-        }
-        .floatleft:after{content:'';display:block; clear:both;height:0px;overflow:hidden;visibility:hidden;}
-        .floatleft div{
-            width:100px;
-            height:100px;
-            background:#ccc;
-            float:left;
-            margin-right:-10px;
-        }
-        .songboder{
-            width:500px;background:#ccc;
-            margin:0px auto;
-        }
-         .songboder:after{content:'';display:block; clear:both;height:0px;overflow:hidden;visibility:hidden;}
-      .songboder div{width:98px;height:98px;border:1px solid #ff6a00;margin-right:-1px;margin-bottom:-1px;float:left;position:relative;}
-      .songboder div:hover{z-index:101;}
+        .floatleft { margin: 0px auto; margin-left: 500px; border: 5px solid #ccc; padding: 50px; }
+        .floatleft:after { content: ''; display: block; clear: both; height: 0px; overflow: hidden; visibility: hidden; }
+        .floatleft div { width: 100px; height: 100px; background: #ccc; float: left; margin-right: -10px; }
+        .songboder { width: 500px; background: #ccc; margin: 0px auto; }
+        .songboder:after { content: ''; display: block; clear: both; height: 0px; overflow: hidden; visibility: hidden; }
+        .songboder div { width: 98px; height: 98px; border: 1px solid #ff6a00; margin-right: -1px; margin-bottom: -1px; float: left; position: relative; }
+        .songboder div:hover { z-index: 101; }
 
         /* 两列右侧自适应布局 */
-.g-bd1{margin:0 0 10px;}
-.g-sd1{position:relative;float:left;width:190px;margin-right:-190px;}
-.g-mn1{float:right;width:100%;}
-.g-mn1c{margin-left:200px;}
+         .g-bd1:after { display: block; visibility: hidden; font-size: 0; line-height: 0; clear: both; content: ""; }
+        .g-bd1 { margin: 0 0 10px; }
+        .g-sd1 { position: relative; float: left; width: 190px; margin-right: -190px; background: #ccc; }
+        .g-mn1 { float: right; width: 100%; }
+        .g-mn1c { margin-left: 200px; background: #09F; }
+
+        .auto-height{overflow:hidden;}
+        .auto-height:after { display: block; visibility: hidden; font-size: 0; line-height: 0; clear: both; content: ""; }
+        .auto-height .left { float: left; width: 29%;  padding-bottom: 9999px; margin-bottom: -9999px;background: #ccc;}
+        .auto-height .left .content { }
+        .auto-height .right { float: left; width: 70%; background: #09F; }
     </style>
     <div class="container">
         <ul>
@@ -93,6 +87,70 @@
         <div class="g-mn1">
             <div class="g-mn1c">
                 <p>右侧自适应</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="auto-height">
+        <div class="left">
+            <div class="content">
+               abcdefg
+            </div>
+        </div>
+        <div class="right">
+            <div class="content">
+                a
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
     </div>
