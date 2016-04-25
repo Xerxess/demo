@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>技巧-8种等高布局</title>
+  <meta charset="utf-8" />
+  <link href="css/normalize.css" rel="stylesheet" />
+  <script src="scripts/jquery-1.12.0.js"></script>
+  <style>
+    .clearfix { *zoom: 1; }
+    .clearfix::after { content: ''; display: block; clear: both; overflow: hidden; visibility: hidden; width: 0; height: 0; }
+    .border { border-bottom: 1px solid #bbb; padding: 15px; }
+    * { box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <p class="border">1.假等高列</p>
+  <style>
+    .container { background: url(/images/dialog-close-icon.png); width: 960px; margin: 0 auto; }
+    .container .left { float: left; width: 220px; background: #ccc; height: 300px; }
+    .container .content { float: left; width: 480px; background: #ddd; height: 400px; }
+    .container .right { float: left; width: 220px; background: #967777; height: 500px; }
+  </style>
+  <div class="container clearfix">
+    <div class="left">left</div>
+    <div class="content">
+      优点：<br />
+      实现方法简单，兼容性强，不需要太多的css样式就可以轻松实现。
+
+      缺点：<br />
+      使用这种方法不适合流体布局等高列的布局，另外如果你需要更换背景色或实现其他列数的等高列时，都需要重新制作过背景图。
+    </div>
+    <div class="right">right</div>
+  </div>
+  <br /><br /><br />
+  <p class="border">2.给容器div使用单独的背景色（固定布局）</p>
+  <style type="text/css">
+    .container1 { width: 960px; margin: 0 auto; }
+    .container1 .rightWrap { width: 100%; float: left; background: green; overflow: hidden; position: relative; }
+    .container1 .contentWrap { float: left; background: orange; width: 100%; position: relative; right: 320px; /*此值等于rightSidebar的宽度*/ }
+    .container1 .leftWrap { width: 100%; background: lime; float: left; position: relative; right: 420px; /*此值等于Content的宽度*/ }
+
+    .container1 #left { float: left; width: 220px; overflow: hidden; position: relative; left: 740px; height: 500px; }
+    .container1 #content { float: left; width: 420px; overflow: hidden; position: relative; left: 740px; }
+    .container1 #right { float: left; overflow: hidden; width: 320px; background: #333; position: relative; left: 740px; }
+  </style>
+
+  <div class="container1 clearfix">
+    <div class="rightWrap">
+      <div class="contentWrap">
+        <div class="leftWrap">
+          <div class="aside column leftSidebar" id="left"></div>
+          <div class="column section" id="content">
+            优点：<br />
+            这种方法是不需要借助其他东西（javascript,背景图等）,而是纯CSS和HTML实现的等高列布局，并且能兼容所有浏览器（包括IE6），并且可以很容易创建任意列数。
+            <br /><br />
+            缺点：<br />
+            这种方法不像其他方法一样简单明了，给你理解会带来一定难度，但是只要你理解清楚了，将能帮你创建任意列数的等高布局效果。
+          </div>
+          <div class="aside rightSidebat column" id="right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br /><br />
+  <p class="border">3.给容器div使用单独的背景色（流体布局）</p>
+  <style type="text/css">
+    #container3 { float: left; width: 100%; background: green; /**/ overflow: hidden; position: relative; }
+    #container2 { float: left; width: 100%; background: yellow; position: relative; right: 30%; /*大小等于col3的宽度*/ }
+    #container1 { float: left; width: 100%; background: orange; position: relative; right: 40%; /*大小等于col2的宽度*/ }
+
+    #col1 { float: left; width: 26%; /*增加了2%的padding，所以宽度减少4%*/ position: relative; left: 72%; /*距左边呀增加2%就成72%*/ overflow: hidden; }
+    #col2 { float: left; width: 36%; /*增加了2%的padding，所以宽度减少4%*/ position: relative; left: 76%; /*距左边有三个padding为2%,所以距离变成76%*/ overflow: hidden; }
+    #col3 { float: left; width: 26%; /*增加了2%的padding，所以宽度减少4%*/ position: relative; left: 80%; /*距左边5个padding为2%，所以距离变成80%*/ overflow: hidden; }
+  </style>
+  <div id="container3">
+    <div id="container2">
+      <div id="container1">
+        <div id="col1"></div>
+        <div id="col2">
+          优点：<br />
+          兼容各浏览器，可以制作流体等高列，交无列数限制。
+          <br />
+          缺点：<br />
+          标签使用较多，结构过于复杂，不易于理解，不过你掌握了其原理也就不难了，这也不算太大缺点。
+        </div>
+        <div id="col3"></div>
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br />
+  <p class="border">4、使用正padding和负margin对冲实现多列布局方法</p>
+  <style type="text/css">
+    #container4 { margin: 0 auto; overflow: hidden; width: 960px; }
+
+    #container4 .column4 { background: #ccc; float: left; width: 200px; margin-right: 5px; margin-bottom: -99999px; padding-bottom: 99999px; }
+
+    #container4 #content4 { background: #eee; }
+
+    #container4 #right4 { float: right; margin-right: 0; height: 500px; }
+  </style>
+
+  <div id="container4">
+    <div id="left4" class="column4 aside">
+      <p>Sidebar</p>
+    </div>
+    <div id="content4" class="column4 section">
+      <p>
+        Main content<br />
+        优点：<br />
+        这种可能实现多列等高布局，并且也能实现列与列之间分隔线效果，结构简单，兼容所有浏览器<br />
+        缺点：<br />
+        这种方法存在一个很大的缺陷，那就是如果要实现每列四周有边框效果，那么每列的底部（或顶部）将无法有边框效果。
+      </p>
+    </div>
+    <div id="right4" class="column4 aside">
+      <p>Sidebar</p>
+    </div>
+  </div>
+  <br /><br /><br />
+  <p class="border">5、使用边框和定位模拟列等高</p>
+  <style type="text/css">
+    #wrapper5 { width: 960px; margin: 0 auto; }
+    #wrapper5 #mainContent5 { border-right: 220px solid #dfdfdf; position: absolute; width: 960px; background: #ff6a00; }
+    #wrapper5 #sidebar5 { background: #ffd800; margin-left: 740px; position: absolute; width: 220px; }
+  </style>
+
+  <div id="wrapper5">
+    <div id="mainContent5">
+      优点：<br />
+
+      结构简单，兼容各浏览器，容易掌握。<br />
+
+      缺点：<br />
+
+      这个方法就是无法单独给主内容列设置背景色，并且实现多列效果效果不佳。
+    </div>
+    <div id="sidebar5">...</div>
+  </div>
+
+  <br /><br /><br />
+  <p class="border">6、边框模仿等高列</p>
+  <style type="text/css">
+    #container6 { background-color: #0ff; overflow: hidden; width: 960px; margin: 0 auto; }
+    #container6 #content6 { background-color: #0ff; width: 740px; border-right: 220px solid #f00; /* 边框大小和颜色设置和right大小与颜色一样 */ margin-right: -220px; /*此负边距大小与right边栏宽度一样*/ float: left; }
+    #container6 #right6 { background-color: #f00; width: 220px; float: left; }
+  </style>
+
+  <div id="container6">
+    <div id="content6">
+      This is<br />some content<br />优点：<br />
+
+      能兼容所有浏览器效果，结构简单明了，容易掌握。<br />
+
+      缺点：<br />
+
+      列数受到极限，超过三列不好控制。
+    </div>
+    <div id="right6">This is the right</div>
+  </div>
+  <br /><br /><br />
+  <p class="border">7、模仿表格布局实列等高列效果</p>
+  <style type="text/css">
+    .table7 { width: auto; min-width: 1000px; margin: 0 auto; padding: 0; display: table; }
+    .table7 .tableRow7 { display: table-row; }
+    .table7 .tableCell7 { display: table-cell; width: 33%; }
+    .table7 .cell17 { background: #f00; }
+    .table7 .cell27 { background: #0f0; }
+    .table7 .cell37 { background: #00f; }
+  </style>
+  <div class=" table7">
+    <div class=" tableRow7">
+      <div class=" tableCell7 cell17">
+        <div class=" ">
+          left
+        </div>
+      </div>
+      <div class=" tableCell7 cell27">
+        <div class=" section">
+          优点：<br />
+          这是一种非常简单，易于实现的方法。<br />
+          缺点：<br />
+          兼容性不好，在ie6-7无法正常运行。<br />
+        </div>
+      </div>
+      <div class=" tableCell7 cell37">
+        <div class=" ">
+          right
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="border">8、javascript</p>
+
+
+
+  <style type="text/css">
+    .wrapper4-1 { width: 960px; margin: 0 auto; }
+    .container4-1 { position: relative; overflow: hidden; zoom: 1; }
+    /* zoom fix for ie6 */
+    .col14-1 { float: left; width: 728px; padding-bottom: 32767px; margin-bottom: -32767px; border: #f36 1px solid; background: #AFAFAF; }
+    .col24-1 { float: right; width: 208px; padding-bottom: 32767px; margin-bottom: -32767px; border: #f36 1px solid; background: #6F6F6F; }
+    .colBottom14-1 { position: absolute; /*相对于div.container*/ bottom: 0; left: 0px; /*如果第一列左浮动就设置left:0;*/ height: 1px; /*当前列的边框宽度*/ width: 730px; /*当前列宽度+边框宽度*2 */ background: #f36; /*当前列的边框颜色*/ }
+    .colBottom24-1 { position: absolute; /*相对于div.container*/ bottom: 0; right: 0px; /*如果第二列右浮动就设置left:0;*/ height: 1px; /*当前列的边框宽度*/ width: 210px; /*当前列宽度+边框宽度*2 */ background: #f36; /*当前列的边框颜色*/ }
+  </style>
+
+  <div class="wrapper4-1">
+    <div class="container4-1">
+      <div class="col14-1">
+        <br /><br /><br /><br /><br /><br /><br /><br />
+        内容
+        <div class="colBottom14-1">
+          <!-- ie needs this comment for small div heights -->
+        </div>
+      </div>
+      <div class="col24-1">
+        <div class="colBottom24-1"><!-- ie needs this comment for small div heights --></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
