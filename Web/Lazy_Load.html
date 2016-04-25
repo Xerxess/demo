@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title></title>
+  <meta charset="utf-8" />
+  <style>
+    img {width:300px; }
+  </style>
+</head>
+<body>
+  <div class="lazy-container">
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+    <div><img src="images/loading.gif" _src="images/dialog-close-icon.png" alt="" /></div>
+  </div>
+  <script src="scripts/jquery-1.12.0.js"></script>
+  <script>
+
+    !function (w) {
+      $.fn.extend({
+        //图片延迟加载
+        lazyload: function (opt) {
+          var _global = {
+            dir: true,//滚动条方向
+            containerwidth: $(window).width(),//容器宽度
+            containerheight: $(window).height(),//窗口高度
+          }
+          var _def = {
+
+          }
+          var _clear_resize = false;
+
+          $(window).on('resize', function () {
+            if (_clear_resize) clearTimeout(_clear_resize);
+            _clear_resize = setTimeout(function () {
+              _global.containerwidth = $(window).width();
+              _global.containerheight = $(window).height();
+              console.log(_global);
+            }, 15);
+          });
+          return this.each(function () {
+
+          });
+        }
+      });
+    }(window);
+
+    $('.lazy-container').lazyload();
+  </script>
+</body>
+</html>
