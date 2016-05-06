@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>单元测试</title>
+  <link href="css/normalize.css" rel="stylesheet" />
+  <script src="/scripts/jquery-1.12.0.min.js"></script>
+  <script src="/qunit/qunit-1.23.1.js"></script>
+  <link href="/qunit/qunit-1.23.1.css" rel="stylesheet" />
+  <script>
+    $(document).ready(function () {
+      //QUnit.test("a basic test example", function (assert) {
+      //  assert.ok(true, "this test is fine");
+      //  var value = "hello";
+      //  assert.equal("hello", value);
+      //});
+
+      //QUnit.module("Module A");
+
+      //QUnit.test("first test within module", function (assert) {
+      //  assert.ok(true, "all pass");
+      //});
+
+      //QUnit.test("second test within module", function (assert) {
+      //  assert.ok(true, "all pass");
+      //});
+
+      //QUnit.module("Module B");
+
+      //QUnit.test("some other test", function (assert) {
+      //  assert.expect(2);
+      //  assert.equal(false, false, "failing test");
+      //  assert.equal(true, true, "passing test");
+      //});
+
+      //QUnit.test("assert.async() test", function (assert) {
+      //  var done = assert.async();
+      //  var input = $("#test-input").focus();
+      //  setTimeout(function () {
+      //    assert.equal(document.activeElement, input[0], "Input was focused");
+      //    done();
+      //  }, 5000);
+      //});
+
+
+      //QUnit.module("group a");
+      //QUnit.test("a basic test example", function (assert) {
+      //  assert.ok(true, "this test is fine");
+      //});
+      //QUnit.test("a basic test example 2", function (assert) {
+      //  assert.ok(true, "this test is fine");
+      //});
+
+      //QUnit.module("group b");
+      //QUnit.test("a basic test example 3", function (assert) {
+      //  assert.ok(true, "this test is fine");
+      //});
+      //QUnit.test("a basic test example 4", function (assert) {
+      //  assert.ok(true, "this test is fine");
+      //});
+
+
+      QUnit.module("module", {
+        beforeEach: function (assert) {
+          assert.ok(true, "one extra assert per test");
+        }, afterEach: function (assert) {
+          assert.ok(true, "and one extra assert after each test");
+        }
+      });
+      QUnit.test("test with beforeEach and afterEach", function (assert) {
+
+        assert.ok(true, "this test is fine");
+        assert.ok(true, "this test is fine");
+      });
+
+      QUnit.test("a test", function (assert) {
+        assert.expect(2);
+
+        function calc(x, operation) {
+          return operation(x);
+        }
+
+        var result = calc(2, function (x) {
+          assert.ok(true, "calc() calls operation function");
+          return x * x;
+        });
+
+        assert.equal(result, 4, "2 squared equals 4");
+      });
+
+      //QUnit.test("a test", function (assert) {
+    
+      //  function calc(x, operation) {
+      //    return operation(x);
+      //  }
+
+      //  var result = calc(2, function (x) {
+      //    assert.ok(true, "calc() calls operation function");
+      //    return x * x;
+      //  });
+
+      //  assert.equal(result, 4, "2 square equals 4");
+      //});
+    });
+  </script>
+
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <input id="test-input" />
+</body>
+</html>

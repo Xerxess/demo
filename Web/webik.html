@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <title>华龙征信webix-DEMO</title>
+  <script src="webix/webix.js"></script>
+  <script src="webix/ui/sidebar.js"></script>
+  <link href="webix/webix.css" rel="stylesheet" />
+  <link href="webix/ui/sidebar.css" rel="stylesheet" />
+  <script src="scripts/jquery-1.12.0.js"></script>
+  <!--<link rel="stylesheet" href="http://cdn.webix.com/edge/webix.css">
+   <script src="http://cdn.webix.com/edge/webix.js"></script>
+   <script src="http://cdn.webix.com/components/sidebar/sidebar.js"></script>
+   <link rel="stylesheet" href="http://cdn.webix.com/components/sidebar/sidebar.css">-->
+  <style>
+    .app_button button { padding: 0; text-align: center; }
+  </style>
+</head>
+<body>
+  <script type="text/javascript">
+    var menu_data = [
+      {
+        id: "dashboard", icon: "dashboard", value: "信用信息", data: [
+         { id: "dashboard1", value: "数据上报" },
+         { id: "dashboard2", value: "数据上报 - 初审" },
+        { id: "dashboard2", value: "数据上报 - 终审" },
+    { id: "dashboard2", value: "信用目录管理" },
+    { id: "dashboard2", value: "信用目录授权" }
+        ]
+      },
+      {
+        id: "layouts", icon: "columns", value: "查询中心", data: [
+         { id: "accrodions", value: "信用档案查询" }
+        ]
+      },
+      {
+        id: "tables", icon: "table", value: "统计报表", data: [
+         { id: "tables1", value: "信用评级统计" },
+         { id: "tables2", value: "成员单位数据上报统计报表" },
+         { id: "tables3", value: "信用档案被查询统计" }
+        ]
+      },
+      {
+        id: "uis", icon: "puzzle-piece", value: "帐号管理", data: [
+         { id: "dataview", value: "账号管理" },
+         { id: "list", value: "角色管理" }
+        ]
+      },
+      {
+        id: "tools", icon: "calendar-o", value: "个人中心", data: [
+         { id: "kanban", value: "我的资料" },
+         { id: "pivot", value: "修改密码" }
+        ]
+      },
+      {
+        id: "forms", icon: "pencil-square-o", value: "日志查询", data: [
+         { id: "buttons", value: "日志查询" }
+        ]
+      },
+      {
+        id: "demo", icon: "book", value: "门户网站维护", data: [
+    { id: "buttons", value: "栏目管理" },
+      { id: "selects", value: "文章管理" }
+        ]
+      }
+    ];
+    var small_film_set = [
+    { id: 1, title: "The Shawshank Redemption", year: 1994, votes: 678790, rating: 9.2, rank: 1, category: "Thriller" },
+    { id: 2, title: "The Godfather", year: 1972, votes: 511495, rating: 9.2, rank: 2, category: "Crime" },
+    { id: 3, title: "The Godfather: Part II", year: 1974, votes: 319352, rating: 9.0, rank: 3, category: "Crime" },
+    { id: 4, title: "The Good, the Bad and the Ugly", year: 1966, votes: 213030, rating: 8.9, rank: 4, category: "Western" },
+    { id: 5, title: "Pulp fiction", year: 1994, votes: 533848, rating: 8.9, rank: 5, category: "Crime" },
+    { id: 6, title: "12 Angry Men", year: 1957, votes: 164558, rating: 8.9, rank: 6, category: "Western" }
+    ];
+
+
+    webix.ready(function () {
+      webix.ui({
+        rows: [
+          {
+            view: "toolbar", padding: 3, elements: [
+              {
+                view: "button", type: "icon", icon: "bars",
+                width: 37, align: "left", css: "app_button", click: function () {
+                  $$("$sidebar1").toggle()
+                }
+              },
+              { view: "label", label: "华龙征信" },
+              {},
+              {
+                view: "button", type: "icon", width: 45, css: "app_button", icon: "envelope-o", badge: 4, click: function () {
+                }
+              },
+              { view: "button", type: "icon", width: 45, css: "app_button", icon: "bell-o", badge: 10 }
+            ]
+          },
+          {
+            cols: [
+              {
+                view: "sidebar",
+                data: menu_data,
+                on: {
+                  onAfterSelect: function (id) {
+                    webix.message("Selected: " + this.getItem(id).value)
+                  }
+                }
+              },
+              {
+                rows: [
+                  { view: "template", type: "header", template: "This is a List Header" }
+                  ,
+                {
+                  view: "datatable",
+                  columns: [
+                    { id: "rank", header: "", css: "rank", width: 50 },
+                    { id: "title", header: "Film title", width: 200 },
+                    { id: "year", header: "Released", width: 80 },
+                    { id: "votes", header: "Votes", width: 100 }
+                  ],
+                  select: "row", scrollX: false,
+                  fillspace: true,
+                  data: small_film_set
+                }, {
+                  view: 'pager', master: false, size: 15, group: 3, count: 150,
+                  template: '{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()}',
+                  on: {
+                    onItemClick: function (id, e, node) {
+                      console.log(arguments);
+                    }
+                  }
+                }
+                ]
+              }
+            ]
+          }
+        ]
+      });
+    });
+  </script>
+
+  <script>
+    // 创建Promise实例p1
+    var p1 = new Promise(function (resovle, reject) {
+      setTimeout(function () {
+        console.log('hello1');
+        // 1秒后修改promise实例的状态为fulfilled
+       resovle('hello1');
+      }, 1000);
+    });
+    // 订阅p1的执行成功事件处理函数，并创建Promise实例p2
+    // 该处理函数将立即返回结果
+    var p2 = p1.then(function (val) {
+      var newVal = 'hello2';
+      console.log(val);
+      console.log(newVal);
+      return newVal;
+    })
+    //console.log(p2);
+    // 订阅p2的执行成功事件处理函数，并创建Promise实例p3
+    // 该处理函数返回一个Promise实例，并1秒后该Promise实例的状态转换为rejected
+    var p3 = p2.then(function (val) {
+      console.log(val);
+      var tmp = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          reject(new Error('my error!'));
+        }, 1000);
+      });
+      return tmp;
+    });
+    // 订阅p3的执行成功事件处理函数，并创建Promise实例p4
+    // 由于p2的处理函数所返回的Promise实例状态为rejected，因此p3的执行成功事件处理函数将不被执行，并且p3没有执行失败事件处理函数，因此会将控制权往下传递给p4的执行失败事件处理函数。
+    var p4 = p3.then(function (val) {
+      console.log('skip');
+    })
+    //  订阅p4的执行成功事件处理函数，并创建Promise实例p5
+    var p5 = p4.catch(function (reason) {
+      console.log(reason);
+    });
+
+  </script>
+</body>
+</html>
